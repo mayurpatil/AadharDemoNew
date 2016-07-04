@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aadhar API Demo</title>
+  <h4>
+   <center>Working with Aadhar APIs</center>
+  </h4>
+</head>
+<body>
+  
+  
+  
+  	<script>
+     //Simple AUTH - Aadhar ID with Name
+		function authenticate() {
+        var aadharId = document.getElementById('AadharId').value;
+        var Name = document.getElementById('User_Name').value;
+
+        if((aadharId != "" && aadharId !=null) && (Name != "" && Name !=null))
+          {
+                
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					document.getElementById('ajaxResponseName').innerHTML = xmlhttp.responseText;
+					;
+					//alert(xmlhttp.responseText);
+				}
+			}
+			
+			var url = "authenticate_json?AadharId=" + aadharId + "&User_Name=" + Name;
+         //alert(url);
+
+			xmlhttp.open("GET", url, true);
+
+			xmlhttp.send(null);
+			}
+      }
+	
+       //OTP
+		function otpjson() {
+        var aadharId = document.getElementById('AadharIdOTP').value;
+        
+        if(aadharId != "" && aadharId !=null) 
+          {
+                
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					document.getElementById('ajaxResponseOTP').innerHTML = xmlhttp.responseText;
+					;
+					//alert(xmlhttp.responseText);
+				}
+			}
+			
+			var url = "otpjson?AadharId=" + aadharId;
+         //alert(url);
+
+			xmlhttp.open("GET", url, true);
+
+			xmlhttp.send(null);
+			}
+      }
+     
+     
+     //eKYC
+		function eKYCjson() {
+        var aadharId = document.getElementById('AadharIdOTP').value;
+        var otp = document.getElementById('OTP').value;
+        
+        if((aadharId != "" && aadharId !=null) && (otp != "" && otp !=null))
+          {
+                
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					document.getElementById('ajaxResponseeKYC').innerHTML = xmlhttp.responseText;
+					;
+					//alert(xmlhttp.responseText);
+				}
+			}
+			
+			var url = "kycjson?AadharId=" + aadharId + "&OTP=" + otp;
+         //alert(url);
+
+		  xmlhttp.open("GET", url, true);
+		  //xmlhttp.open("POST", "kycjson", true);
+        //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //xmlhttp.send("AadharId=" + aadharId + "&OTP=" + otp + "");    
+            
+		  xmlhttp.send(null);
+			}
+      }
+     
+     </script>
+  
+  <center>
+	<form>
+     <fieldset>
+      <legend>Simple Authentication - AadharId with Name</legend>
+		Enter Aadhar Number <input type="text" id="AadharId" required> Enter
+		Name <input type="text" id="User_Name" required> 
+       <input type="button" value="Authenticate" onclick="authenticate();">
+       </fieldset>
+     <br/>
+     <h3>  
+     <div id="ajaxResponseName"></div>
+     </h3>
+	</form>
+    </center>
+  
+  <center>
+  	<form>
+     <fieldset>
+      <legend>Generate OTP for eKYC</legend>
+		Enter Aadhar Number <input type="text" id="AadharIdOTP" required>
+       <input type="button" value="Send OTP" onclick="otpjson();">
+       </fieldset>
+     <br/>
+     <h3>
+     <div id="ajaxResponseOTP"></div>
+     </h3>
+	</form>
+    </center>
+  
+    <center>
+  	<form>
+     <fieldset>
+      <legend>Enter OTP for eKYC</legend>
+		Enter OTP <input type="text" id="OTP" required>
+       <input type="button" value="eKYC" onclick="eKYCjson();">
+       </fieldset>
+     <br/>
+     <h3>
+     <div id="ajaxResponseeKYC"></div>
+     </h3>
+	</form>
+    </center>
+    
+  <center><a href="http://bridge.aadhaarconnect.com" target="_blank">Aadhar APIs</a></center>
+</body>
+</html>
